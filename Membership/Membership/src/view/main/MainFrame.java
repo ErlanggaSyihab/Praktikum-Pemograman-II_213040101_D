@@ -1,9 +1,7 @@
 package view.main;
 
 import java.awt.FlowLayout;
-import java.awt.event.*;
 import javax.swing.*;
-import javax.swing.table.*;
 import model.*;
 import view.jenismember.JenisMemberFrame;
 import view.member.MemberFrame;
@@ -31,12 +29,11 @@ public class MainFrame extends JFrame {
         this.memberFrame = new MemberFrame(memberDao, jenisMemberDao);
         
         this.setLayout(new FlowLayout());
-        
+        MainButtonActionListener actionListener = new MainButtonActionListener(this);
+
         // Membuat dan menambahkan tombol
         this.buttonJenisMember = new JButton("Jenis Member");
         this.buttonMember = new JButton("Member");
-
-        MainButtonActionListener actionListener = new MainButtonActionListener(this);
 
         this.buttonJenisMember.addActionListener(actionListener);
         this.buttonMember.addActionListener(actionListener);
@@ -70,5 +67,18 @@ public class MainFrame extends JFrame {
         }
         memberFrame.populateComboJenis();
         memberFrame.setVisible(true);
+    }
+
+    public static void main(String[] args) {
+        // Inisialisasi objek DAO
+        JenisMemberDao jenisMemberDao = new JenisMemberDao();
+        MemberDao memberDao = new MemberDao();
+
+        javax.swing.SwingUtilities.invokeLater(new Runnable() {
+            public void run() {
+                MainFrame f = new MainFrame(jenisMemberDao, memberDao);
+                f.setVisible(true);
+            }
+        });
     }
 }

@@ -17,23 +17,11 @@ public class JenisMemberButtonSimpanActionListener implements ActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         String nama = this.jenisMemberFrame.getNama();
-
-        // Validasi nama untuk memastikan tidak kosong
-        if (nama == null || nama.trim().isEmpty()) {
-            this.jenisMemberFrame.showError("Nama tidak boleh kosong.");
-            return;
-        }
-
-        JenisMember jenisMember = new JenisMember();
+        JenisMember jenisMember = new  JenisMember();
         jenisMember.setId(UUID.randomUUID().toString());
         jenisMember.setNama(nama);
 
-        // Menyimpan jenisMember ke dalam frame dan database
         this.jenisMemberFrame.addJenisMember(jenisMember);
-        if (this.jenisMemberDao.insert(jenisMember) > 0) {
-            this.jenisMemberFrame.showSuccess("Jenis member berhasil disimpan.");
-        } else {
-            this.jenisMemberFrame.showError("Gagal menyimpan jenis member.");
-        }
+        this.jenisMemberDao.insert(jenisMember);
     }
 }

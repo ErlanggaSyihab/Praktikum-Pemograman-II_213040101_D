@@ -15,7 +15,6 @@ public class MemberFrame extends JFrame {
     private JTextField textFieldNama;
     private MemberTableModel tableModel;
     private JComboBox<String> comboJenis;
-
     private MemberDao memberDao;
     private JenisMemberDao jenisMemberDao;
 
