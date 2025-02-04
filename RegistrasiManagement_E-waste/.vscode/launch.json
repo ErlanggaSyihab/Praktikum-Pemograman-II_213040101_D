@@ -1,0 +1,70 @@
+{
+    // Use IntelliSense to learn about possible attributes.
+    // Hover to view descriptions of existing attributes.
+    // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
+    "version": "0.2.0",
+    "configurations": [
+        {
+            "type": "java",
+            "name": "Current File",
+            "request": "launch",
+            "mainClass": "${file}"
+        },
+        {
+            "type": "java",
+            "name": "DataSampah",
+            "request": "launch",
+            "mainClass": "DataSampah",
+            "projectName": "RegistrasiManagement_E-waste_db68afdb"
+        },
+        {
+            "type": "java",
+            "name": "Login",
+            "request": "launch",
+            "mainClass": "Login",
+            "projectName": "RegistrasiManagement_E-waste_db68afdb"
+        },
+        {
+            "type": "java",
+            "name": "LupaPassword",
+            "request": "launch",
+            "mainClass": "LupaPassword",
+            "projectName": "RegistrasiManagement_E-waste_db68afdb"
+        },
+        {
+            "type": "java",
+            "name": "OtpAktivasiAkun",
+            "request": "launch",
+            "mainClass": "OtpAktivasiAkun",
+            "projectName": "RegistrasiManagement_E-waste_db68afdb"
+        },
+        {
+            "type": "java",
+            "name": "OtpUbahPassword",
+            "request": "launch",
+            "mainClass": "OtpUbahPassword",
+            "projectName": "RegistrasiManagement_E-waste_db68afdb"
+        },
+        {
+            "type": "java",
+            "name": "Profil",
+            "request": "launch",
+            "mainClass": "Profil",
+            "projectName": "RegistrasiManagement_E-waste_db68afdb"
+        },
+        {
+            "type": "java",
+            "name": "Register",
+            "request": "launch",
+            "mainClass": "Register",
+            "projectName": "RegistrasiManagement_E-waste_db68afdb"
+        },
+        {
+            "type": "java",
+            "name": "UbahPassword",
+            "request": "launch",
+            "mainClass": "UbahPassword",
+            "projectName": "RegistrasiManagement_E-waste_db68afdb"
+        }
+    ]
+}

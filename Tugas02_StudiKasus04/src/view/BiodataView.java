@@ -11,6 +11,8 @@ public class BiodataView extends JFrame {
     private JTable table;
     private DefaultTableModel tableModel;
     private BiodataDao biodataDao;
+    private JProgressBar progressBar;
+    private JLabel statusLabel;
 
     public BiodataView() {
         biodataDao = new BiodataDao();
@@ -38,19 +40,53 @@ public class BiodataView extends JFrame {
         buttonPanel.add(deleteButton);
         add(buttonPanel, BorderLayout.SOUTH);
 
+        // Create progress bar and status label
+        JPanel statusPanel = new JPanel(new BorderLayout());
+        progressBar = new JProgressBar(0, 100);
+        statusLabel = new JLabel("Ready", JLabel.CENTER);
+        statusPanel.add(progressBar, BorderLayout.NORTH);
+        statusPanel.add(statusLabel, BorderLayout.SOUTH);
+        add(statusPanel, BorderLayout.NORTH);
+
         // Add event listeners for buttons
         addButton.addActionListener(e -> addBiodata());
         deleteButton.addActionListener(e -> deleteBiodata());
 
-        // Load data initially
+        // Load data initially using SwingWorker
         loadData();
     }
 
     private void loadData() {
-        List<Biodata> biodataList = biodataDao.getAllBiodata();
-        for (Biodata biodata : biodataList) {
-            tableModel.addRow(new Object[]{biodata.getId(), biodata.getNama(), biodata.getAlamat(), biodata.getEmail(), biodata.getTelepon()});
-        }
+        SwingWorker<Void, Integer> worker = new SwingWorker<Void, Integer>() {
+            @Override
+            protected Void doInBackground() throws Exception {
+                List<Biodata> biodataList = biodataDao.getAllBiodata();
+                int progress = 0;
+                int size = biodataList.size();
+                for (int i = 0; i < size; i++) {
+                    Biodata biodata = biodataList.get(i);
+                    tableModel.addRow(new Object[]{biodata.getId(), biodata.getNama(), biodata.getAlamat(), biodata.getEmail(), biodata.getTelepon()});
+                    progress = (int) ((i + 1) * 100.0 / size);
+                    publish(progress); // Update progress
+                }
+                return null;
+            }
+
+            @Override
+            protected void process(List<Integer> chunks) {
+                int latestProgress = chunks.get(chunks.size() - 1);
+                progressBar.setValue(latestProgress);
+                statusLabel.setText("Loading... " + latestProgress + "%");
+            }
+
+            @Override
+            protected void done() {
+                progressBar.setValue(100);
+                statusLabel.setText("Load data selesai!");
+            }
+        };
+
+        worker.execute();
     }
 
     private void addBiodata() {
